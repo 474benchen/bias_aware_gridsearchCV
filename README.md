@@ -12,7 +12,59 @@ This repository introduces a novel variation of the `GridSearchCV` algorithm fro
   - Mortgage: Facilitating fair lending practices.
   - Finance: Promoting equity in income-related decisions.
 
-## Installation
+## Getting Started
+
+
+To replicate our environment, you can choose from the following options. Regardless of which option,
+in order to explore our work:
+
+1. Clone the repository:
+
+    ```
+    git clone https://github.com/474benchen/biased_gridsearch.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```
+    cd biased_gridsearch
+    ```
+### Option 1: Using requirements.txt
+
+1. Install the required packages using pip:
+
+    ```
+    pip install -r requirements.txt
+    ```
+
+2. Proceed to the next steps for dataset setup.
+
+### Option 2: Reconstructing the Conda Environment
+
+Ensure that you have conda installed before attempting this option. distributions can be found [here](https://www.anaconda.com/download).
+
+1. Create a conda environment from the provided environment.yml file:
+
+    ```
+    conda env create -f environment.yml
+    ```
+
+2. Activate the conda environment:
+
+    ```
+    conda activate biased_gs
+    ```
+
+3. Proceed to the next steps for dataset setup.
+
+## Dataset Setup
+
+To effectively run the provided examples, it's essential to prepare the data. We have included the datasets within the data.zip file in this repository.
+
+Steps to Set Up the Dataset:
+Unzip the Data: Extract data.zip into the biased_gridsearch directory. This process can be done using any standard file extraction tool or command line utilities.
+
+Verify the Contents: After extraction, you should find a data folder within the biased_gridsearch directory. This folder will contain CSV files, representing data from our different domains.
 
 
 ## Examples
