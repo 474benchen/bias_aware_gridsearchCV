@@ -24,3 +24,26 @@ def calculate_disparate_impact(df, outcome_column, protected_attribute, privileg
 
     return disparate_impact
 
+def calculate_statistical_parity_difference(dataset, protected_attribute, prediction_var, favorable_outcome):
+    """ 
+    Calculate statistical parity difference for pandas table that includes protected attribute and prediction. 
+    
+    Args:
+        df (pd.Dataframe): DataFrame containing the data.
+        protected_attribute (str): Column name of targeted attribute in DataFrame.
+        prediction_var (str): Column name of prediction attribute in DataFrame
+        favorable_outcome (str or int): Value of a positive outcome in prediction column.
+    Returna:
+        dict: Keys are each unique value in column protected_attribute. Values are statistical parity difference.
+    """
+    spd_by_attribute = {}
+    for attribute in dataset[protected_attribute].unique():
+        # Probability of the minority group
+        prob_minority = (dataset[dataset[protected_attribute] == attribute][prediction_var]
+                        == favorable_outcome).mean()
+        # Probability of the majority group
+        prob_majority = (dataset[dataset[protected_attribute] != attribute][prediction_var]
+                        == favorable_outcome).mean()
+        # Calculate statistical parity difference
+        spd_by_attribute[attribute] = prob_minority - prob_majority
+    return spd_by_attribute
