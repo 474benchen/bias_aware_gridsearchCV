@@ -1,4 +1,4 @@
-# biased_gridsearch: Enhanced GridSearchCV for Bias and Accuracy Optimization
+# biased_aware_gridsearchCV: Enhanced GridSearchCV for Bias and Accuracy Optimization
 
 ## Introduction
 This repository introduces a novel variation of the `GridSearchCV` algorithm from `scikit-learn`, uniquely designed to optimize machine learning models not only for accuracy but also for fairness metrics. This project addresses the critical need for unbiased models in machine learning, especially in sensitive domains like healthcare, recidivism prediction, mortgage lending, and income-based financial decisions.
