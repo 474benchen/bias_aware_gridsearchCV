@@ -38,10 +38,10 @@ def calculate_disparate_impact_dict(df, outcome_column, protected_attribute):
     di_by_attribute = {}
     for attribute in df[protected_attribute].unique():
         # Probability of favorable outcome for privileged group
-        prob_privileged = df[(df[protected_attribute] != attribute) & (df[outcome_column] == 1)].shape[0] / df[df[protected_attribute] == privileged_value].shape[0]
+        prob_privileged = df[(df[protected_attribute] != attribute) & (df[outcome_column] == 1)].shape[0] / df[df[protected_attribute] != attribute].shape[0]
 
         # Probability of favorable outcome for unprivileged group
-        prob_unprivileged = df[(df[protected_attribute] == attribute) & (df[outcome_column] == 1)].shape[0] / df[df[protected_attribute] == unprivileged_value].shape[0]
+        prob_unprivileged = df[(df[protected_attribute] == attribute) & (df[outcome_column] == 1)].shape[0] / df[df[protected_attribute] == attribute].shape[0]
 
         # Calculate disparate impact
         di_by_attribute[attribute] = prob_unprivileged / prob_privileged
