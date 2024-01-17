@@ -1,14 +1,14 @@
-from sklearn.model_selection import ParameterGrid
+from sklearn.model_selection import KFold, StratifiedKFold, ParameterGrid
 from sklearn.metrics import accuracy_score
 from sklearn.base import clone
 import numpy as np
 import pandas as pd
 from util import calculate_disparate_impact, calculate_statistical_parity_difference
 
-class BiasAwareGridSearch:
-    def __init__(self, estimator, param_grid, df, outcome_column, protected_attribute, privileged_value, unprivileged_value):
+class BiasAwareGridSearchCV:
+    def __init__(self, estimator, param_grid, df, outcome_column, protected_attribute, privileged_value, unprivileged_value, cv=5):
         """
-        Initializes the BiasAwareGridSearch object.
+        Initializes the BiasAwareGridSearchCV object.
 
         Args:
             estimator: The machine learning estimator to use.
@@ -18,6 +18,7 @@ class BiasAwareGridSearch:
             protected_attribute: Name of the column representing the protected attribute.
             privileged_value: The value in the protected attribute column that represents the privileged group.
             unprivileged_value: The value in the protected attribute column that represents the unprivileged group.
+            cv: Number of folds to use for cross-validation.
         """
         self.estimator = estimator
         self.param_grid = param_grid
@@ -26,30 +27,46 @@ class BiasAwareGridSearch:
         self.protected_attribute = protected_attribute
         self.privileged_value = privileged_value
         self.unprivileged_value = unprivileged_value
+        self.cv = cv
         self.results_ = []
 
     def fit(self, X, y):
         """
-        Runs the grid search over the specified parameter grid, evaluating models for both accuracy and bias.
+        Runs the grid search with cross-validation over the specified parameter grid, evaluating models for accuracy and bias.
 
         Args:
             X: Features from the training data.
             y: Target variable from the training data.
         """
+        kf = KFold(n_splits=self.cv)
         for params in ParameterGrid(self.param_grid):
-            self.estimator.set_params(**params)
-            self.estimator.fit(X, y)
-            preds = self.estimator.predict(X)
-            accuracy = accuracy_score(y, preds)
-            
-            # Create a temporary DataFrame to calculate disparate impact
-            temp_df = pd.DataFrame({self.outcome_column: preds, self.protected_attribute: self.df[self.protected_attribute]})
-            bias = calculate_disparate_impact(temp_df, self.outcome_column, self.protected_attribute, self.privileged_value, self.unprivileged_value)
+            accuracies = []
+            biases = []
+
+            for train_index, val_index in kf.split(X):
+                X_train, X_val = X[train_index], X[val_index]
+                y_train, y_val = y[train_index], y[val_index]
+
+                model = clone(self.estimator)
+                model.set_params(**params)
+                model.fit(X_train, y_train)
+                preds = model.predict(X_val)
+
+                accuracy = accuracy_score(y_val, preds)
+                accuracies.append(accuracy)
+                
+                temp_df = self.df.iloc[val_index].copy()
+                temp_df[self.outcome_column] = preds
+                bias = calculate_disparate_impact(temp_df, self.outcome_column, self.protected_attribute, self.privileged_value, self.unprivileged_value)
+                biases.append(bias)
+
+            avg_accuracy = np.mean(accuracies)
+            avg_bias = np.mean(biases)
 
             self.results_.append({
                 'params': params,
-                'accuracy': accuracy,
-                'bias': bias
+                'accuracy': avg_accuracy,
+                'bias': avg_bias
             })
 
     def select_highest_accuracy_model(self):
