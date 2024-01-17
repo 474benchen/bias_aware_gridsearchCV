@@ -30,34 +30,36 @@ class BiasAwareGridSearchCV:
         self.cv = cv
         self.results_ = []
 
-    def fit(self, X, y):
+    def fit(self, X_train, y_train):
         """
         Runs the grid search with cross-validation over the specified parameter grid, evaluating models for accuracy and bias.
 
         Args:
-            X: Features from the training data.
-            y: Target variable from the training data.
+            X_train: DataFrame containing the features from the training data.
+            y_train: Series or array-like containing the target variable from the training data.
         """
         kf = KFold(n_splits=self.cv)
         for params in ParameterGrid(self.param_grid):
             accuracies = []
             biases = []
 
-            for train_index, val_index in kf.split(X):
-                X_train, X_val = X[train_index], X[val_index]
-                y_train, y_val = y[train_index], y[val_index]
+            for train_index, val_index in kf.split(X_train):
+                X_train_fold, X_val_fold = X_train.iloc[train_index], X_train.iloc[val_index]
+                y_train_fold, y_val_fold = y_train.iloc[train_index], y_train.iloc[val_index]
 
                 model = clone(self.estimator)
                 model.set_params(**params)
-                model.fit(X_train, y_train)
-                preds = model.predict(X_val)
+                model.fit(X_train_fold, y_train_fold)
+                preds = model.predict(X_val_fold)
 
-                accuracy = accuracy_score(y_val, preds)
+                accuracy = accuracy_score(y_val_fold, preds)
                 accuracies.append(accuracy)
                 
-                temp_df = self.df.iloc[val_index].copy()
-                temp_df[self.outcome_column] = preds
-                bias = calculate_disparate_impact(temp_df, self.outcome_column, self.protected_attribute, self.privileged_value, self.unprivileged_value)
+                # Extract protected attribute for bias calculation
+                protected_attr_val = X_val_fold[self.protected_attribute]
+                temp_df = pd.DataFrame({self.outcome_column: y_val_fold, self.protected_attribute: protected_attr_val})
+                temp_df[self.outcome_column + '_pred'] = preds
+                bias = calculate_disparate_impact(temp_df, self.outcome_column + '_pred', self.protected_attribute, self.privileged_value, self.unprivileged_value)
                 biases.append(bias)
 
             avg_accuracy = np.mean(accuracies)
@@ -68,6 +70,7 @@ class BiasAwareGridSearchCV:
                 'accuracy': avg_accuracy,
                 'bias': avg_bias
             })
+
 
     def select_highest_accuracy_model(self):
         """
