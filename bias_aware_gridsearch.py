@@ -4,9 +4,11 @@ from sklearn.base import clone
 import numpy as np
 import pandas as pd
 from util import calculate_disparate_impact, calculate_statistical_parity_difference
+from joblib import Parallel, delayed
+
 
 class BiasAwareGridSearchCV:
-    def __init__(self, estimator, param_grid, df, outcome_column, protected_attribute, privileged_value, unprivileged_value, cv=5):
+    def __init__(self, estimator, param_grid, df, outcome_column, protected_attribute, privileged_value, unprivileged_value, cv=4, n_jobs=1, verbose=True):
         """
         Initializes the BiasAwareGridSearchCV object.
 
@@ -28,18 +30,26 @@ class BiasAwareGridSearchCV:
         self.privileged_value = privileged_value
         self.unprivileged_value = unprivileged_value
         self.cv = cv
+        self.n_jobs = n_jobs
+        self.verbose = verbose
         self.results_ = []
 
-    def fit(self, X_train, y_train):
+    def fit(self, X_train, y_train, bias_function):
         """
-        Runs the grid search with cross-validation over the specified parameter grid, evaluating models for accuracy and bias.
+        Runs the grid search with cross-validation over the specified parameter grid,
+        evaluating models for accuracy and bias in parallel.
 
         Args:
             X_train: DataFrame containing the features from the training data.
             y_train: Series or array-like containing the target variable from the training data.
+            bias_function: function to calculate the bias metric of interest.
         """
         kf = KFold(n_splits=self.cv)
-        for params in ParameterGrid(self.param_grid):
+
+        def process_params(params):
+            if self.verbose:
+                print(f"Processing parameters: {params}")
+
             accuracies = []
             biases = []
 
@@ -54,22 +64,23 @@ class BiasAwareGridSearchCV:
 
                 accuracy = accuracy_score(y_val_fold, preds)
                 accuracies.append(accuracy)
-                
+
                 # Extract protected attribute for bias calculation
                 protected_attr_val = X_val_fold[self.protected_attribute]
                 temp_df = pd.DataFrame({self.outcome_column: y_val_fold, self.protected_attribute: protected_attr_val})
                 temp_df[self.outcome_column + '_pred'] = preds
-                bias = calculate_disparate_impact(temp_df, self.outcome_column + '_pred', self.protected_attribute, self.privileged_value, self.unprivileged_value)
+                bias = bias_function(temp_df, self.outcome_column + '_pred', self.protected_attribute, self.privileged_value, self.unprivileged_value)
                 biases.append(bias)
 
-            avg_accuracy = np.mean(accuracies)
-            avg_bias = np.mean(biases)
-
-            self.results_.append({
+            return {
                 'params': params,
-                'accuracy': avg_accuracy,
-                'bias': avg_bias
-            })
+                'accuracy': np.mean(accuracies),
+                'bias': np.mean(biases)
+            }
+
+        self.results_ = Parallel(n_jobs=self.n_jobs)(
+            delayed(process_params)(params) for params in ParameterGrid(self.param_grid)
+        )
 
 
     def select_highest_accuracy_model(self):
@@ -120,4 +131,30 @@ class BiasAwareGridSearchCV:
         return model
 
     def find_optimum_model(self, margin):
-        pass
+        """
+        Searches for the model with the least bias exhibited within the specified margin of distance
+        from the highest accuracy.
+
+        Args:
+            margin: Float representing the tolerance in accuracy discrepancy
+        Returns:
+            The retrained model.
+        """
+        # Find the highest accuracy
+        max_accuracy = max(result['accuracy'] for result in self.results_)
+
+        # Filter models within the specified margin of the highest accuracy
+        eligible_models = [result for result in self.results_ if result['accuracy'] >= max_accuracy - margin]
+
+        if not eligible_models:
+            raise ValueError("No models found within the specified accuracy margin.")
+
+        # Select the model with the least bias among these
+        best_model = min(eligible_models, key=lambda x: x['bias'])
+
+        if self.verbose:
+            print(f"Selected model parameters: {best_model['params']} with accuracy: {best_model['accuracy']}, bias: {best_model['bias']}")
+
+        # Retrain the model with the selected parameters
+        return self._retrain_model(best_model['params'])
+
