@@ -1,4 +1,5 @@
 import pandas as pd
+import pickle
 
 def calculate_disparate_impact(df, outcome_column, protected_attribute, privileged_value, unprivileged_value):
     """
@@ -93,3 +94,15 @@ def calculate_statistical_parity_difference_dict(dataset, protected_attribute, p
         # Calculate statistical parity difference
         spd_by_attribute[attribute] = prob_minority - prob_majority
     return spd_by_attribute
+
+def save_model(model, filepath):
+    """
+    Helper function to save a model after training. Filepath should end in 'pkl'
+    for pickle format.
+
+    Args:
+        model (sklearn model): trained model to be saved
+        filepath (string): filename or path to file for model to be saved
+    """
+    with open(filepath, 'wb') as f:
+        pickle.dump(model, f)
