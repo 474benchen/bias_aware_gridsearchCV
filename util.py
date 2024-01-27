@@ -48,49 +48,43 @@ def calculate_disparate_impact_dict(df, outcome_column, protected_attribute):
         di_by_attribute[attribute] = prob_unprivileged / prob_privileged
     return di_by_attribute
 
-def calculate_statistical_parity_difference(dataset, protected_attribute, privileged_value, unprivileged_value, prediction_var, favorable_outcome):
+def calculate_statistical_parity_difference(df, outcome_column, protected_attribute, privileged_value, unprivileged_value):
     """ 
     Calculate statistical parity difference for pandas table that includes protected attribute and prediction. 
     
     Args:
         df (pd.Dataframe): DataFrame containing the data.
+        outcome_column (str): Column name of prediction attribute in DataFrame
         protected_attribute (str): Column name of targeted attribute in DataFrame.
         privileged_value (str or int): The value of the protected attribute that represents the privileged group.
         unprivileged_value (str or int): The value of the protected attribute that represents the unprivileged group.
-        prediction_var (str): Column name of prediction attribute in DataFrame
-        favorable_outcome (str or int): Value of a positive outcome in prediction column.
-    Returna:
+    Returns:
         float: Statistical parity difference.
     """
     # Probability of the minority group
-    prob_minority = (dataset[dataset[protected_attribute] == unprivileged_value][prediction_var]
-                    == favorable_outcome).mean()
+    prob_minority = (df[df[protected_attribute] == unprivileged_value][outcome_column] == 1).mean()
     # Probability of the majority group
-    prob_majority = (dataset[dataset[protected_attribute] != privileged_value][prediction_var]
-                    == favorable_outcome).mean()
+    prob_majority = (df[df[protected_attribute] != privileged_value][outcome_column] == 1).mean()
     # Calculate statistical parity difference
     return prob_minority - prob_majority
 
-def calculate_statistical_parity_difference_dict(dataset, protected_attribute, prediction_var, favorable_outcome):
+def calculate_statistical_parity_difference_dict(df, outcome_column, protected_attribute):
     """ 
     Calculate statistical parity difference for pandas table that includes protected attribute and prediction. 
     
     Args:
         df (pd.Dataframe): DataFrame containing the data.
+        outcome_column (str): Column name of prediction attribute in DataFrame
         protected_attribute (str): Column name of targeted attribute in DataFrame.
-        prediction_var (str): Column name of prediction attribute in DataFrame
-        favorable_outcome (str or int): Value of a positive outcome in prediction column.
-    Returna:
+    Returns:
         dict: Keys are each unique value in column protected_attribute. Values are statistical parity difference.
     """
     spd_by_attribute = {}
-    for attribute in dataset[protected_attribute].unique():
+    for attribute in df[protected_attribute].unique():
         # Probability of the minority group
-        prob_minority = (dataset[dataset[protected_attribute] == attribute][prediction_var]
-                        == favorable_outcome).mean()
+        prob_minority = (df[df[protected_attribute] == attribute][outcome_column] == 1).mean()
         # Probability of the majority group
-        prob_majority = (dataset[dataset[protected_attribute] != attribute][prediction_var]
-                        == favorable_outcome).mean()
+        prob_majority = (df[df[protected_attribute] != attribute][outcome_column] == 1).mean()
         # Calculate statistical parity difference
         spd_by_attribute[attribute] = prob_minority - prob_majority
     return spd_by_attribute
