@@ -2,6 +2,7 @@ from sklearn.model_selection import KFold, StratifiedKFold, ParameterGrid
 from sklearn.metrics import accuracy_score
 from sklearn.base import clone
 import numpy as np
+import matplotlib.pyplot as plt
 import pandas as pd
 from util import calculate_disparate_impact, calculate_statistical_parity_difference
 from joblib import Parallel, delayed
@@ -157,4 +158,28 @@ class BiasAwareGridSearchCV:
 
         # Retrain the model with the selected parameters
         return self._retrain_model(best_model['params'])
+    
+    def plot_models(self, threshold):
+        """
+        Plots the line graph of models' accuracy and bias.
+
+        Args:
+            threshold: The number of top models to consider based on accuracy, draws line on the plot.
+        Returns:
+            The plot.
+        """
+        # Sorts models from lowest to highest accuracy
+        sorted_models = sorted(self.results_, key=lambda x: x['accuracy'], reverse=True)
+        
+        # Get accuracy and bias
+        accuracy = [result['accuracy'] for result in sorted_models]
+        bias = [result['bias'] for result in sorted_models]
+
+        # Find threshold value
+        val = (accuracy[threshold - 1] + accuracy[threshold]) / 2
+
+        # Plot accuracy and bias
+        ax = plt.axvline(x = val, color = 'r')
+        ax = plt.plot(accuracy, bias)
+        return ax
 
