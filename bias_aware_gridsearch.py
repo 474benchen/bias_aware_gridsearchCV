@@ -161,7 +161,7 @@ class BiasAwareGridSearchCV:
     
     def plot_models(self, threshold):
         """
-        Plots the line graph of models' accuracy and bias.
+        Plots the line graph of models' accuracy and bias. X axis is accuracy. Y axis is bias.
 
         Args:
             threshold: The number of top models to consider based on accuracy, draws line on the plot.
