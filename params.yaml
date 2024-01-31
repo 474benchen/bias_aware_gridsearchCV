@@ -30,7 +30,6 @@ detailed_rfc_params:
     - 50
     - None
   class_weight:
-    - None
     - 'balanced'
     - 'balanced_subsample'
 

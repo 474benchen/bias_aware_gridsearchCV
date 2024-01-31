@@ -101,7 +101,7 @@ class BiasAwareGridSearchCV:
         Returns:
             The model with the least bias.
         """
-        best_params = min(self.results_, key=lambda x: x['bias'])['params']
+        best_params = min(self.results_, key=lambda x: np.abs(x['bias']))['params']
         return self._retrain_model(best_params)
 
     def select_balanced_model(self, threshold):
@@ -114,7 +114,7 @@ class BiasAwareGridSearchCV:
             The model with the least bias among the top models based on accuracy.
         """
         top_accurate_models = sorted(self.results_, key=lambda x: x['accuracy'], reverse=True)[:threshold]
-        best_params = min(top_accurate_models, key=lambda x: x['bias'])['params']
+        best_params = min(top_accurate_models, key=lambda x: np.abs(x['bias']))['params']
         return self._retrain_model(best_params)
 
     def _retrain_model(self, params):
@@ -151,7 +151,7 @@ class BiasAwareGridSearchCV:
             raise ValueError("No models found within the specified accuracy margin.")
 
         # Select the model with the least bias among these
-        best_model = min(eligible_models, key=lambda x: x['bias'])
+        best_model = min(eligible_models, key=lambda x: np.abs(x['bias']))
 
         if self.verbose:
             print(f"Selected model parameters: {best_model['params']} with accuracy: {best_model['accuracy']}, bias: {best_model['bias']}")

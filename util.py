@@ -5,6 +5,9 @@ def calculate_disparate_impact(df, outcome_column, protected_attribute, privileg
     """
     Calculates the disparate impact ratio for a single protected attribute comparing privileged and unprivileged values.
 
+    A value of 0 implies perfect fairness, a negative value implies a bias in favor of the unprivileged group,
+    a positive value implies a bias against the unprivileged group.
+
     Args:
         df (pd.DataFrame): DataFrame containing the data.
         outcome_column (str): Name of the column with the binary outcome (1 for positive outcome, 0 for negative).
@@ -23,11 +26,14 @@ def calculate_disparate_impact(df, outcome_column, protected_attribute, privileg
     # Calculate disparate impact
     disparate_impact = prob_unprivileged / prob_privileged
 
-    return disparate_impact
+    return 1 - disparate_impact
 
 def calculate_disparate_impact_dict(df, outcome_column, protected_attribute):
     """
     Calculates the disparate impact ratio for a single protected attribute comparing privileged and unprivileged values.
+
+    A value of 0 implies perfect fairness, a negative value implies a bias in favor of the unprivileged group,
+    a positive value implies a bias against the unprivileged group.
 
     Args:
         df (pd.DataFrame): DataFrame containing the data.
@@ -45,12 +51,15 @@ def calculate_disparate_impact_dict(df, outcome_column, protected_attribute):
         prob_unprivileged = df[(df[protected_attribute] == attribute) & (df[outcome_column] == 1)].shape[0] / df[df[protected_attribute] == attribute].shape[0]
 
         # Calculate disparate impact
-        di_by_attribute[attribute] = prob_unprivileged / prob_privileged
+        di_by_attribute[attribute] = 1 - (prob_unprivileged / prob_privileged)
     return di_by_attribute
 
 def calculate_statistical_parity_difference(df, outcome_column, protected_attribute, privileged_value, unprivileged_value):
     """ 
     Calculate statistical parity difference for pandas table that includes protected attribute and prediction. 
+
+    A value of 0 implies perfect fairness, a negative value implies a bias against the unprivileged group,
+    a positive value implies a bias for the unprivileged group.
     
     Args:
         df (pd.Dataframe): DataFrame containing the data.
@@ -71,6 +80,9 @@ def calculate_statistical_parity_difference(df, outcome_column, protected_attrib
 def calculate_statistical_parity_difference_dict(df, outcome_column, protected_attribute):
     """ 
     Calculate statistical parity difference for pandas table that includes protected attribute and prediction. 
+
+    A value of 0 implies perfect fairness, a negative value implies a bias against the unprivileged group,
+    a positive value implies a bias for the unprivileged group.
     
     Args:
         df (pd.Dataframe): DataFrame containing the data.
