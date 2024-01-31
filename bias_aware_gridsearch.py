@@ -159,12 +159,12 @@ class BiasAwareGridSearchCV:
         # Retrain the model with the selected parameters
         return self._retrain_model(best_model['params'])
     
-    def plot_models(self, threshold):
+    def plot_accuracy(self, threshold):
         """
         Plots the line graph of models' accuracy and bias. X axis is accuracy. Y axis is bias.
 
         Args:
-            threshold: The number of top models to consider based on accuracy, draws line on the plot.
+            threshold: The integer of top models to consider based on accuracy, draws line on the plot.
         Returns:
             The plot.
         """
@@ -182,4 +182,20 @@ class BiasAwareGridSearchCV:
         ax = plt.axvline(x = val, color = 'r')
         ax = plt.plot(accuracy, bias)
         return ax
+    
+    def plot_params(self, parameter):
+        """
+        Plots the line graph of parameters and bias, ideally for a continuous parameter. X axis is parameter. Y axis is bias.
+
+        Args:
+            paramenter (str): The name of a parameter from the initial param_grid. 
+        Returns:
+            The plot.
+        """
+        # Get parameter and bias
+        params = [result['params'][parameter] for result in self.results_]
+        bias = [result['bias'] for result in self.results_]
+
+        # Plot parameter and bias
+        return plt.plot(params, bias)
 
