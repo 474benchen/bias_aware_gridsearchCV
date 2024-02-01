@@ -73,7 +73,7 @@ def calculate_statistical_parity_difference(df, outcome_column, protected_attrib
     # Probability of the minority group
     prob_minority = (df[df[protected_attribute] == unprivileged_value][outcome_column] == 1).mean()
     # Probability of the majority group
-    prob_majority = (df[df[protected_attribute] != privileged_value][outcome_column] == 1).mean()
+    prob_majority = (df[df[protected_attribute] == privileged_value][outcome_column] == 1).mean()
     # Calculate statistical parity difference
     return prob_minority - prob_majority
 
