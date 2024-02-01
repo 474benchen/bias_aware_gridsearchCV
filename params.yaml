@@ -8,7 +8,7 @@ detailed_rfc_params:
     - 20
     - 40
     - 50
-    - None
+    - 100
   min_samples_split: 
     - 2
     - 5
@@ -28,7 +28,7 @@ detailed_rfc_params:
     - 30
     - 40
     - 50
-    - None
+    - 100
   class_weight:
     - 'balanced'
     - 'balanced_subsample'
@@ -48,7 +48,7 @@ depth_rfc_params:
     - 30
     - 40
     - 50
-    - None
+    - 100
 
 leaf_rfc_params:
     max_leaf_nodes:
@@ -57,5 +57,5 @@ leaf_rfc_params:
     - 30
     - 40
     - 50
-    - None
+    - 100
 
