@@ -92,6 +92,11 @@ class BiasAwareGridSearchCV:
             The model with the highest accuracy.
         """
         best_params = max(self.results_, key=lambda x: x['accuracy'])['params']
+        best_model = [model for model in self.results_ if model['params'] == best_params][0]
+
+        if self.verbose:
+            print(f"Selected model parameters: {best_params} with accuracy: {best_model['accuracy']}, bias: {best_model['bias']}")
+
         return self._retrain_model(best_params)
 
     def select_least_biased_model(self):
@@ -102,6 +107,11 @@ class BiasAwareGridSearchCV:
             The model with the least bias.
         """
         best_params = min(self.results_, key=lambda x: np.abs(x['bias']))['params']
+        best_model = [model for model in self.results_ if model['params'] == best_params][0]
+
+        if self.verbose:
+            print(f"Selected model parameters: {best_params} with accuracy: {best_model['accuracy']}, bias: {best_model['bias']}")
+
         return self._retrain_model(best_params)
 
     def select_balanced_model(self, threshold):
@@ -115,6 +125,11 @@ class BiasAwareGridSearchCV:
         """
         top_accurate_models = sorted(self.results_, key=lambda x: x['accuracy'], reverse=True)[:threshold]
         best_params = min(top_accurate_models, key=lambda x: np.abs(x['bias']))['params']
+        best_model = [model for model in self.results_ if model['params'] == best_params][0]
+
+        if self.verbose:
+            print(f"Selected model parameters: {best_params} with accuracy: {best_model['accuracy']}, bias: {best_model['bias']}")
+            
         return self._retrain_model(best_params)
 
     def _retrain_model(self, params):
