@@ -76,7 +76,8 @@ class BiasAwareGridSearchCV:
             return {
                 'params': params,
                 'accuracy': np.mean(accuracies),
-                'bias': np.mean(biases)
+                'bias': np.mean(biases),
+                'raw_biases': biases
             }
 
         self.results_ = Parallel(n_jobs=self.n_jobs)(
