@@ -61,12 +61,7 @@ Ensure that you have conda installed before attempting this option. Distribution
 
 ## Data Setup
 
-To effectively run the provided examples, it's essential to prepare the data. We have included the datasets within the data.zip file in this repository.
-
-Steps to Set Up the Dataset:
-Unzip the Data: Extract data.zip into the biased_gridsearch directory. This process can be done using any standard file extraction tool or command line utilities.
-
-Verify the Contents: After extraction, you should find a data folder within the biased_gridsearch directory. This folder will contain CSV files, representing data from our different domains.
+For each example, data has been provided in the same directory.
 
 
 ## Examples
