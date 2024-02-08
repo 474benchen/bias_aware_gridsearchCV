@@ -2,6 +2,7 @@ from sklearn.model_selection import KFold, StratifiedKFold, ParameterGrid
 from sklearn.metrics import accuracy_score
 from sklearn.base import clone
 import numpy as np
+import seaborn as sns
 import matplotlib.pyplot as plt
 import pandas as pd
 from util import calculate_disparate_impact, calculate_statistical_parity_difference
@@ -188,15 +189,16 @@ class BiasAwareGridSearchCV:
         sorted_models = sorted(self.results_, key=lambda x: x['accuracy'], reverse=True)
         
         # Get accuracy and bias
-        accuracy = [result['accuracy'] for result in sorted_models]
-        bias = [result['bias'] for result in sorted_models]
+        plot_df = pd.DataFrame()
+        plot_df['accuracy'] = [result['accuracy'] for result in sorted_models]
+        plot_df['bias'] = [result['bias'] for result in sorted_models]
 
         # Find threshold value
-        val = (accuracy[threshold - 1] + accuracy[threshold]) / 2
+        val = (plot_df.accuracy.loc[threshold - 1] + plot_df.accuracy.loc[threshold]) / 2
 
         # Plot accuracy and bias
         ax = plt.axvline(x = val, color = 'r')
-        ax = plt.plot(accuracy, bias)
+        ax = sns.lmplot(plot_df, x='accuracy', y='bias')
         return ax
     
     def plot_params(self, parameter):
@@ -209,9 +211,10 @@ class BiasAwareGridSearchCV:
             The plot.
         """
         # Get parameter and bias
-        params = [result['params'][parameter] for result in self.results_]
-        bias = [result['bias'] for result in self.results_]
+        plot_df = pd.DataFrame()
+        plot_df[parameter] = [result['params'][parameter] for result in self.results_]
+        plot_df['bias'] = [result['bias'] for result in self.results_]
 
         # Plot parameter and bias
-        return plt.plot(params, bias)
+        return sns.lmplot(plot_df, x=parameter, y='bias')
 
