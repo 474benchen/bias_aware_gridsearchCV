@@ -197,8 +197,8 @@ class BiasAwareGridSearchCV:
         val = (plot_df.accuracy.loc[threshold - 1] + plot_df.accuracy.loc[threshold]) / 2
 
         # Plot accuracy and bias
-        ax = plt.axvline(x = val, color = 'r')
         ax = sns.lmplot(plot_df, x='accuracy', y='bias')
+        plt.axvline(x = val, color = 'r')
         return ax
     
     def plot_params(self, parameter):
