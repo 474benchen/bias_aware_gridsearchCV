@@ -10,7 +10,7 @@ from joblib import Parallel, delayed
 
 
 class BiasAwareGridSearchCV:
-    def __init__(self, estimator, param_grid, df, outcome_column, protected_attribute, privileged_value, unprivileged_value, cv=4, n_jobs=1, verbose=True):
+    def __init__(self, estimator, param_grid, df, outcome_column, protected_attribute, privileged_value, unprivileged_value, cv=5, n_jobs=1, verbose=True):
         """
         Initializes the BiasAwareGridSearchCV object.
 
