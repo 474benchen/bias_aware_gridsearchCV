@@ -71,9 +71,9 @@ def calculate_statistical_parity_difference(df, outcome_column, protected_attrib
         float: Statistical parity difference.
     """
     # Probability of the minority group
-    prob_minority = (df[df[protected_attribute] == unprivileged_value][outcome_column] == 1).mean()
+    prob_minority = (df[df[protected_attribute] == unprivileged_value][outcome_column] == 0).mean()
     # Probability of the majority group
-    prob_majority = (df[df[protected_attribute] == privileged_value][outcome_column] == 1).mean()
+    prob_majority = (df[df[protected_attribute] == privileged_value][outcome_column] == 0).mean()
     # Calculate statistical parity difference
     return prob_minority - prob_majority
 
@@ -94,9 +94,9 @@ def calculate_statistical_parity_difference_dict(df, outcome_column, protected_a
     spd_by_attribute = {}
     for attribute in df[protected_attribute].unique():
         # Probability of the minority group
-        prob_minority = (df[df[protected_attribute] == attribute][outcome_column] == 1).mean()
+        prob_minority = (df[df[protected_attribute] == attribute][outcome_column] == 0).mean()
         # Probability of the majority group
-        prob_majority = (df[df[protected_attribute] != attribute][outcome_column] == 1).mean()
+        prob_majority = (df[df[protected_attribute] != attribute][outcome_column] == 0).mean()
         # Calculate statistical parity difference
         spd_by_attribute[attribute] = prob_minority - prob_majority
     return spd_by_attribute
