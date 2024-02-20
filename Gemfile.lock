@@ -306,9 +306,9 @@ DEPENDENCIES
   github-pages
   jekyll-feed (~> 0.12)
   jekyll-seo-tag (~> 2.6)
-  just-the-docs
+  just-the-docs (~> 0.7.0)
   tzinfo-data
-  webrick (~> 1.7)
+  webrick (~> 1.8.1)
 
 BUNDLED WITH
    2.5.6

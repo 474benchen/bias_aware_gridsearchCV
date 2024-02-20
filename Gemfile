@@ -3,11 +3,11 @@ source 'https://rubygems.org'
 # If you're using GitHub Pages, you may want to use the github-pages gem.
 # This gem includes a group of dependencies verified to work well with GitHub Pages
 gem 'github-pages', group: :jekyll_plugins
-gem 'webrick', '~> 1.7'
+gem 'webrick', '~> 1.8.1'
+gem 'just-the-docs', '~> 0.7.0'
 
 # Just the Docs - a modern, high customizable, responsive Jekyll theme for documentation with built-in search.
 # You might need to check for the latest compatible version with github-pages
-gem 'just-the-docs'
 
 # Jekyll plugins that are available on GitHub Pages
 group :jekyll_plugins do
