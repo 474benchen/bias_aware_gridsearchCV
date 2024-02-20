@@ -1,0 +1,30 @@
+{"0": {
+    "doc": "About",
+    "title": "About",
+    "content": "This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at jekyllrb.com . You can find the source code for Minima at GitHub: jekyll / minima . You can find the source code for Jekyll at GitHub: jekyll / jekyll . leaving this for my sanity: . CODE . def fizzbuzz(something): return something+1 . ",
+    "url": "/about/",
+    
+    "relUrl": "/about/"
+  },"1": {
+    "doc": "Home",
+    "title": "BAGS: Bias Aware Gridsearch(CV)",
+    "content": "An exploratory venture into including bias considerations into the classical machine learning pipeline. Get started now View it on GitHub . {: .note } Specific use cases and detailed examples can be found in the repo. Welcome to the documentation for BiasAwareGridSearchCV. This tool is a practical extension for machine learning models, focusing on fairness during the hyperparameter tuning process. BiasAwareGridSearchCV evaluates models based on both their accuracy and how fairly they treat a specified protected attribute, like age or gender. It offers different selection methods to find the most accurate, least biased, or a balanced model based on your needs. This approach is particularly useful in scenarios where decision fairness is as important as decision accuracy. The tool also includes visualization features to help you understand the trade-offs between accuracy and bias in your models. With these, you can see how changes in parameters affect your model’s fairness. Our documentation aims to make it easy to use BiasAwareGridSearchCV in your own machine learning workflows, helping you create models that are both effective and fair. ",
+    "url": "/#bags-bias-aware-gridsearchcv",
+    
+    "relUrl": "/#bags-bias-aware-gridsearchcv"
+  },"2": {
+    "doc": "Home",
+    "title": "Getting started",
+    "content": "To replicate our environment, you can choose from the following options. Regardless of which option, in order to explore our work: . | Clone the repository: . git clone https://github.com/474benchen/biased_gridsearch.git . | Navigate to the project directory: . cd biased_gridsearch . Option 1: Using requirements.txt . | . Ensure that you have pip installed before attempting this option. Instructions can be found here. | Install the required packages using pip: . pip install -r requirements.txt . | . Option 2: Reconstructing the Conda Environment . Ensure that you have conda installed before attempting this option. Distributions can be found here. | Create a conda environment from the provided environment.yml file: . conda env create -f environment.yml . | Activate the conda environment: . conda activate biased_gs . | . ",
+    "url": "/#getting-started",
+    
+    "relUrl": "/#getting-started"
+  },"3": {
+    "doc": "Home",
+    "title": "Home",
+    "content": " ",
+    "url": "/",
+    
+    "relUrl": "/"
+  }
+}
