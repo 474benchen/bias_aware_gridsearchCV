@@ -1,8 +1,0 @@
-name: biased_gs
-channels:
-  - defaults
-dependencies:
-  - python=3.12.1
-  - pip
-  - pip:
-    - -r requirements.txt
