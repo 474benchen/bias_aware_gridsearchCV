@@ -2,9 +2,9 @@ name: Jekyll site CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [ gh-pages ]  # Set this to gh-pages
   pull_request:
-    branches: [ main ]
+    branches: [ gh-pages ]  # Set this to gh-pages
 
 jobs:
   build:
@@ -12,6 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      with:
+        ref: gh-pages  # Specify the gh-pages branch
 
     - name: Setup Ruby
       uses: ruby/setup-ruby@v1
