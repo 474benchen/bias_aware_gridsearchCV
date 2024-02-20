@@ -3,32 +3,3 @@ _site
 .jekyll-cache
 .jekyll-metadata
 vendor
-# Site and build output
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
-
-# Dependency directories
-/vendor/
-/node_modules/
-
-# Specific dependency lock files
-Gemfile.lock
-yarn.lock
-package-lock.json
-
-# Personal data
-.env
-.env.*
-
-# System files
-.DS_Store
-Thumbs.db
-
-# IDE specific files
-.idea/
-.vscode/
-*.swp
-*.swo
-*.sublime*
