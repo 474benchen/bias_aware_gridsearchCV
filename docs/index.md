@@ -15,7 +15,8 @@ An exploratory venture into including bias considerations into the classical mac
 
 ---
 
-{: .note } Specific use cases and detailed examples can be found in the repo.
+{: .note } 
+Specific use cases and detailed examples can be found in the repo.
 
 
 Welcome to the documentation for BiasAwareGridSearchCV. This tool is a practical extension for machine learning models, focusing on fairness during the hyperparameter tuning process.

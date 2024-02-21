@@ -14,6 +14,7 @@ The package is user-friendly and fits smoothly into standard machine learning wo
 
 In short, BiasAwareGridSearchCV is our effort to ensure that AI and machine learning contribute positively and fairly to our society, providing tools that help mitigate bias in automated decision-making.
 
-{: .note } This work runs adjacent to existing bias mitigation techniques - it is presented as a novel step to the pre-processing, in-processing, and post-processing steps that already exist
+{: .note } 
+This work runs adjacent to existing bias mitigation techniques - it is presented as a novel step to the pre-processing, in-processing, and post-processing steps that already exist.
 
 // add flow chart here
