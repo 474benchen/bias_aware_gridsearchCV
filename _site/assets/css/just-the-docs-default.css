@@ -131,6 +131,7 @@
 
 .highlight .language-json .kc { color: #0083bb; }
 
+
 /*! normalize.css v8.0.1 | MIT License | github.com/necolas/normalize.css */
 /* Document ========================================================================== */
 /** 1. Correct the line height in all browsers. 2. Prevent adjustments of font size after orientation changes in iOS. */
@@ -289,7 +290,7 @@ blockquote { margin: 10px 0; margin-block-start: 0; margin-inline-start: 0; padd
 @media (min-width: 50rem) { .main-header.nav-open { display: flex; } }
 
 .site-nav, .site-header, .site-footer { width: 100%; }
-@media (min-width: 66.5rem) { .site-nav, .site-header, .site-footer { width: 16.5rem; } }
+@media (min-width: 66.5rem) { .site-nav, .site-header, .site-footer { width: 20rem; } }
 
 .site-nav { display: none; }
 .site-nav.nav-open { display: block; }

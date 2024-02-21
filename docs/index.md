@@ -17,6 +17,7 @@ An exploratory venture into including bias considerations into the classical mac
 
 {: .note } Specific use cases and detailed examples can be found in the repo.
 
+
 Welcome to the documentation for BiasAwareGridSearchCV. This tool is a practical extension for machine learning models, focusing on fairness during the hyperparameter tuning process.
 
 BiasAwareGridSearchCV evaluates models based on both their accuracy and how fairly they treat a specified protected attribute, like age or gender. It offers different selection methods to find the most accurate, least biased, or a balanced model based on your needs. This approach is particularly useful in scenarios where decision fairness is as important as decision accuracy.

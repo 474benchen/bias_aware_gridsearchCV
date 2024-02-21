@@ -3,6 +3,7 @@ layout: page
 title: documentation
 has_children: true
 permalink: /documentation/
+nav_order: 3
 ---
 
 # Documentation
