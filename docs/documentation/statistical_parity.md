@@ -26,7 +26,6 @@ This example demonstrates how to use the calculate_statistical_parity_difference
     'loan_approved': [1, 0, 1, 1, 1, 1, 1, 0]
 }
 >>> df = pd.DataFrame(data)
-
 >>> outcome_column = 'loan_approved'
 >>> protected_attribute = 'gender'
 >>> privileged_value = 'male'
