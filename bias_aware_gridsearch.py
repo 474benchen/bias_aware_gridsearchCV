@@ -10,7 +10,7 @@ from joblib import Parallel, delayed
 
 
 class BiasAwareGridSearchCV:
-    def __init__(self, estimator, param_grid, df, outcome_column, protected_attribute, privileged_value, unprivileged_value, cv=5, n_jobs=1, verbose=True):
+    def __init__(self, estimator, param_grid, df, outcome_column, protected_attribute, privileged_value, unprivileged_value, favorable_result, cv=5, n_jobs=1, verbose=True):
         """
         Initializes the BiasAwareGridSearchCV object.
 
@@ -31,6 +31,7 @@ class BiasAwareGridSearchCV:
         self.protected_attribute = protected_attribute
         self.privileged_value = privileged_value
         self.unprivileged_value = unprivileged_value
+        self.favorable_result = favorable_result
         self.cv = cv
         self.n_jobs = n_jobs
         self.verbose = verbose
@@ -71,7 +72,7 @@ class BiasAwareGridSearchCV:
                 protected_attr_val = X_val_fold[self.protected_attribute]
                 temp_df = pd.DataFrame({self.outcome_column: y_val_fold, self.protected_attribute: protected_attr_val})
                 temp_df[self.outcome_column + '_pred'] = preds
-                bias = bias_function(temp_df, self.outcome_column + '_pred', self.protected_attribute, self.privileged_value, self.unprivileged_value)
+                bias = bias_function(temp_df, self.outcome_column + '_pred', self.protected_attribute, self.privileged_value, self.unprivileged_value, self.favorable_result)
                 biases.append(bias)
 
             return {
