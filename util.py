@@ -62,7 +62,7 @@ def calculate_statistical_parity_difference(df, outcome_column, protected_attrib
     a positive value implies a bias for the unprivileged group.
     
     Args:
-        df (pd.Dataframe): DataFrame containing the data.
+        df (pd.DataFrame): DataFrame containing the data.
         outcome_column (str): Column name of prediction attribute in DataFrame
         protected_attribute (str): Column name of targeted attribute in DataFrame.
         privileged_value (str or int): The value of the protected attribute that represents the privileged group.
@@ -70,12 +70,12 @@ def calculate_statistical_parity_difference(df, outcome_column, protected_attrib
     Returns:
         float: Statistical parity difference.
     """
-    # Probability of the minority group
-    prob_minority = (df[df[protected_attribute] == unprivileged_value][outcome_column] == 0).mean()
-    # Probability of the majority group
-    prob_majority = (df[df[protected_attribute] == privileged_value][outcome_column] == 0).mean()
+    # Probability of a positive outcome for the unprivileged group
+    prob_unprivileged = (df[df[protected_attribute] == unprivileged_value][outcome_column] == 1).mean()
+    # Probability of a positive outcome for the privileged group
+    prob_privileged = (df[df[protected_attribute] == privileged_value][outcome_column] == 1).mean()
     # Calculate statistical parity difference
-    return prob_minority - prob_majority
+    return prob_unprivileged - prob_privileged
 
 def calculate_statistical_parity_difference_dict(df, outcome_column, protected_attribute):
     """ 

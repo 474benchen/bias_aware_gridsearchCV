@@ -23,7 +23,7 @@ This example demonstrates how to use the calculate_disparate_impact function on 
 # Example dataset
 >>> data = {
     'gender': ['male', 'female', 'male', 'female', 'male', 'female', 'male', 'female'],
-    'loan_approved': [1, 0, 1, 1, 0, 1, 1, 0]
+    'loan_approved': [1, 0, 1, 1, 1, 1, 1, 0]
 }
 >>> df = pd.DataFrame(data)
 
@@ -33,9 +33,9 @@ This example demonstrates how to use the calculate_disparate_impact function on 
 >>> unprivileged_value = 'female'
 >>> disparate_impact = calculate_disparate_impact(df, outcome_column, protected_attribute, privileged_value, unprivileged_value)
 >>> print("Disparate Impact Ratio:", disparate_impact)
-Disparate Impact Ratio: 0.25
+Disparate Impact Ratio: 0.5
 ```
 
 The output indicates the degree of disparity in the loan approval process between males and females. A value close to 0 implies fairness, a negative value indicates bias in favor of the unprivileged group, and a positive value indicates bias against the unprivileged group.
 
-With this output, we can see that there is a slight bias against the unprivileged group (in this case, 'female') in the context of loan approvals.
+With this output, we can see that there is a bias against the unprivileged group (in this case, 'female') in the context of loan approvals.

@@ -23,7 +23,7 @@ This example demonstrates how to use the calculate_statistical_parity_difference
 # Example dataset
 >>> data = {
     'gender': ['male', 'female', 'male', 'female', 'male', 'female', 'male', 'female'],
-    'loan_approved': [1, 0, 1, 1, 0, 1, 1, 0]
+    'loan_approved': [1, 0, 1, 1, 1, 1, 1, 0]
 }
 >>> df = pd.DataFrame(data)
 
@@ -33,7 +33,9 @@ This example demonstrates how to use the calculate_statistical_parity_difference
 >>> unprivileged_value = 'female'
 >>> stat_parity_diff = calculate_statistical_parity_difference(df, outcome_column, protected_attribute, privileged_value, unprivileged_value)
 >>> print("Statistical Parity Difference:", stat_parity_diff)
-Statistical Parity Difference: -0.25
+Statistical Parity Difference: -0.5
 ```
+
+The output indicates the degree of statistical parity difference in the loan approval process between males and females. A value close to 0 implies fairness, a negative value indicates bias in against the unprivileged group, and a positive value indicates bias in favor of the unprivileged group.
 
 This result indicates a bias against the unprivileged group (in this case, 'female') in the context of loan approvals.
