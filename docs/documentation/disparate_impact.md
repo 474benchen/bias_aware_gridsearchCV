@@ -11,7 +11,8 @@ Calculates the disparate impact ratio for a single protected attribute comparing
 {: .fs-6 .fw-300 }
 
 ```py
-def calculate_disparate_impact(df, outcome_column, protected_attribute, privileged_value, unprivileged_value, favorable_result)
+def calculate_disparate_impact(df, outcome_column, protected_attribute, 
+privileged_value, unprivileged_value, favorable_result)
 ```
 
 ## Parameters
@@ -49,7 +50,8 @@ This example demonstrates how to use the calculate_disparate_impact function on 
 >>> protected_attribute = 'gender'
 >>> privileged_value = 'male'
 >>> unprivileged_value = 'female'
->>> disparate_impact = calculate_disparate_impact(df, outcome_column, protected_attribute, privileged_value, unprivileged_value, 1)
+>>> disparate_impact = calculate_disparate_impact(df, outcome_column, \
+protected_attribute, privileged_value, unprivileged_value, 1)
 >>> print("Disparate Impact Ratio:", disparate_impact)
 Disparate Impact Ratio: 0.5
 ```
