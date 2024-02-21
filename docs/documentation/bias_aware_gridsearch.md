@@ -5,7 +5,7 @@ parent: documentation
 has_children: True
 ---
 
-# Bias Aware Gridsearch CV
+# Bias Aware Gridsearch CV (BAGS)
 
-To make it as easy as possible to write documentation in plain Markdown, most UI components are styled using default Markdown elements with few additional CSS classes needed.
-{: .fs-6 .fw-300 }
+Bias Aware GridsearchCV is an extension of SciKitLearn's GridsearchCV, with additional consideration 
+for a provided bias metric. 

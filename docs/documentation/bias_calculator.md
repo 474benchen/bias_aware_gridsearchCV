@@ -7,23 +7,7 @@ has_children: True
 
 # Bias Statistic Functions
 
-Tables are responsive by default, allowing wide tables to have a horizontal scroll to access columns outside of the normal viewport.
-
-<div class="code-example" markdown="1">
-
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-
-</div>
-```markdown
-| head1        | head two          | three |
-|:-------------|:------------------|:------|
-| ok           | good swedish fish | nice  |
-| out of stock | good and plenty   | nice  |
-| ok           | good `oreos`      | hmm   |
-| ok           | good `zoute` drop | yumm  |
-```
+A necessary part of considering bias is providing functions that can calculate such metrics. As part of our work, 
+we have provided 2 functions for this: disparate impact and statistical parity. These functions serve more as an example - 
+custom made functions can easily be made to substitute as long as they follow the key criteria of <b>the value for 
+a fair outcome must be 0</b>.
