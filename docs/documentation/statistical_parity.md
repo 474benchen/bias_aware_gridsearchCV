@@ -11,8 +11,13 @@ Calculates the statistical parity difference for a single protected attribute co
 {: .fs-6 .fw-300 }
 
 ```py
-def calculate_statistical_parity_difference(df, outcome_column, protected_attribute, privileged_value, unprivileged_value)
+def calculate_statistical_parity_difference(df, outcome_column, protected_attribute, privileged_value, unprivileged_value, favorable_result)
 ```
+## Parameters
+
+- `param1` (type): Description of param1.
+- `param2` (type): Description of param2.
+- `param3` (type, optional): Description of param3. Default is `default_value`.
 
 ## Example 
 This example demonstrates how to use the calculate_statistical_parity_difference function on a sample dataset. The dataset contains information on loan approvals, with 'gender' as the protected attribute.
@@ -30,7 +35,7 @@ This example demonstrates how to use the calculate_statistical_parity_difference
 >>> protected_attribute = 'gender'
 >>> privileged_value = 'male'
 >>> unprivileged_value = 'female'
->>> stat_parity_diff = calculate_statistical_parity_difference(df, outcome_column, protected_attribute, privileged_value, unprivileged_value)
+>>> stat_parity_diff = calculate_statistical_parity_difference(df, outcome_column, protected_attribute, privileged_value, unprivileged_value, 1)
 >>> print("Statistical Parity Difference:", stat_parity_diff)
 Statistical Parity Difference: -0.5
 ```
