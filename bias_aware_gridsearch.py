@@ -46,7 +46,7 @@ class BiasAwareGridSearchCV:
             y_train: Series or array-like containing the target variable from the training data.
             bias_function: function to calculate the bias metric of interest.
         """
-        kf = KFold(n_splits=self.cv)
+        kf = StratifiedKFold(n_splits=self.cv)
 
         def process_params(params):
             if self.verbose:
