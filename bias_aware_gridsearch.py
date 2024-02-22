@@ -56,7 +56,7 @@ class BiasAwareGridSearchCV:
             accuracies = []
             biases = []
 
-            for train_index, val_index in kf.split(X_train):
+            for train_index, val_index in kf.split(X_train, y_train):
                 X_train_fold, X_val_fold = X_train.iloc[train_index], X_train.iloc[val_index]
                 y_train_fold, y_val_fold = y_train.iloc[train_index], y_train.iloc[val_index]
 
