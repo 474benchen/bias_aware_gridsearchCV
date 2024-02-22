@@ -3,6 +3,7 @@ layout: default
 title: bias statistic functions
 parent: documentation
 has_children: True
+permalink: /documentation/bias_functions
 ---
 
 # Bias Statistic Functions
