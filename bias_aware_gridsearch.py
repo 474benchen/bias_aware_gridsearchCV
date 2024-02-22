@@ -37,7 +37,7 @@ class BiasAwareGridSearchCV:
         self.verbose = verbose
         self.results_ = []
 
-    def fit(self, X_train, y_train, bias_function):
+    def fit(self, X, y, bias_function):
         """
         Runs the grid search with cross-validation over the specified parameter grid,
         evaluating models for accuracy and bias in parallel.
@@ -56,9 +56,9 @@ class BiasAwareGridSearchCV:
             accuracies = []
             biases = []
 
-            for train_index, val_index in kf.split(X_train, y_train):
-                X_train_fold, X_val_fold = X_train.iloc[train_index], X_train.iloc[val_index]
-                y_train_fold, y_val_fold = y_train.iloc[train_index], y_train.iloc[val_index]
+            for train_index, val_index in kf.split(X, y):
+                X_train_fold, X_val_fold = X.iloc[train_index], X.iloc[val_index]
+                y_train_fold, y_val_fold = y.iloc[train_index], y.iloc[val_index]
 
                 model = clone(self.estimator)
                 model.set_params(**params)
