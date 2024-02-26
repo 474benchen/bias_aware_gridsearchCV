@@ -7,6 +7,9 @@ permalink: /documentation/bias_aware_gridsearch_cv
 
 # Bias Aware Gridsearch CV (BAGS)
 
+### `class BiasAwareGridSearchCV(estimator, param_grid, df, outcome_column, protected_attribute, privileged_value, unprivileged_value, favorable_result, cv=5, n_jobs=1, verbose=True)`
+
+
 Bias Aware GridsearchCV is an extension of SciKitLearn's GridsearchCV, with additional consideration 
 for a provided bias metric. 
 
@@ -33,19 +36,29 @@ for a provided bias metric.
 
 - verbose (bool, default=True): Enables verbose output during the grid search if set to True.
 
+## Attributes
+
+- results_: list of dict of values with the structure:
+
+| Key                         | Value                                                                   |
+|--------------------------------|-----------------------------------------------------------------------------------------------------|
+| `params (dict)`                          | Parameters used to initialize the model.                       |
+| `accuracy (float)`| Average accuracy of the model across folds.                          |
+| `bias (float)`    | Average exhibited bias across folds.                                |
+| `raw_bias (list)`        | Exhibited bias for each fold.                          |
 
 
 ## Methods
 
 | Method                         | Description                                                                                         |
 |--------------------------------|-----------------------------------------------------------------------------------------------------|
-| `fit(X,y,bias_function)`                          | Runs grid search with cross-validation, evaluating models for accuracy and bias.                   |
-| `select_highest_accuracy_model()`| Selects the model with the highest accuracy from the grid search results.              |
-| `select_least_biased_model()`    | Selects the model with the least bias from the grid search results.                   |
-| `select_balanced_model()`        | Selects the model with the least bias among top models based on accuracy.             |
+| `fit(X,y,bias_function)`                          | Runs grid search with cross-validation, evaluating models for accuracy and bias.                                                                                                                                   |
+| `select_highest_accuracy_model()`| Selects the model with the highest accuracy from the grid search results.                          |
+| `select_least_biased_model()`    | Selects the model with the least bias from the grid search results.                                |
+| `select_balanced_model()`        | Selects the model with the least bias among top models based on accuracy.                          |
 | `find_optimum_model()`           | Searches for the model with least bias within a margin of highest accuracy.                        |
-| `plot_accuracy(threshold)`                | Plots a line graph of models' accuracy and bias. Draws an additional line at the "threshold" best model                                                 |
-| `plot_params(parameter)`                  | Plots a line graph of a parameter against bias, ideal for a continuous parameter.                  |
+| `plot_accuracy(threshold)`                | Plots a line graph of models' accuracy and bias. Draws an additional line at the "threshold" best model                                                                                                                                   |
+| `plot_params(parameter)`                  | Plots a line graph of a parameter against bias, ideal for a continuous parameter.         |
 
 ---
 
