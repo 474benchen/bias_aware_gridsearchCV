@@ -5,8 +5,8 @@ This repository introduces a novel variation of the `GridSearchCV` algorithm fro
 
 ## Features
 - **Enhanced GridSearch Algorithm**: Extends `sklearn`'s `GridSearchCV` to evaluate and optimize both accuracy and bias metrics simultaneously.
-- **Bias Metrics Integration**: Incorporates key bias metrics like demographic parity, equalized odds, and others, ensuring models are fair and equitable.
-- **Domain-Specific Applications**: Provides practical implementations in four critical domains:
+- **Bias Metrics Integration**: Incorporates key bias metrics such as statistical parity and disparate impact. Leaves room to include other bias metrics.
+- **Domain-Specific Applications**: Provides practical examples in four critical domains:
   - Healthcare: Improving diagnostic fairness.
   - Recidivism: Ensuring unbiased risk assessments.
   - Mortgage: Facilitating fair lending practices.
