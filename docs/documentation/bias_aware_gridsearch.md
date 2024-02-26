@@ -39,10 +39,124 @@ for a provided bias metric.
 
 | Method                         | Description                                                                                         |
 |--------------------------------|-----------------------------------------------------------------------------------------------------|
-| `fit(x,y,bias_function)`                          | Runs grid search with cross-validation, evaluating models for accuracy and bias.                   |
+| `fit(X,y,bias_function)`                          | Runs grid search with cross-validation, evaluating models for accuracy and bias.                   |
 | `select_highest_accuracy_model()`| Selects the model with the highest accuracy from the grid search results.              |
 | `select_least_biased_model()`    | Selects the model with the least bias from the grid search results.                   |
 | `select_balanced_model()`        | Selects the model with the least bias among top models based on accuracy.             |
 | `find_optimum_model()`           | Searches for the model with least bias within a margin of highest accuracy.                        |
 | `plot_accuracy(threshold)`                | Plots a line graph of models' accuracy and bias. Draws an additional line at the "threshold" best model                                                 |
 | `plot_params(parameter)`                  | Plots a line graph of a parameter against bias, ideal for a continuous parameter.                  |
+
+---
+
+### `fit(X,y,bias_function)`
+
+Run fit with all sets of parameters alongside a bias function.
+
+#### Parameters
+
+- X: `array-like` of shape (n_samples, n_features)
+Training vector, where n_samples is the number of samples and n_features is the number of features.
+
+- y: `array-like` of shape (n_samples, n_output)
+Target relative to X for classification or regression.
+
+- bias_function: `callable` -> bias calculator
+
+Function to calculate a bias metric of interest. Criteria for the function are that 0 must represent
+a fair value.
+
+#### Returns
+
+- `None` - populates the instance with the results derived from the provided parameter grid.
+
+---
+
+### `select_highest_accuracy_model()`
+
+Selects and retrains the model with the highest accuracy based on the results of the grid search.
+
+#### Returns
+
+- **best_model**: `estimator` instance  
+  The retrained model instance with the highest accuracy from the grid search results.
+
+---
+
+### `select_least_biased_model()`
+
+Selects and retrains the model with the least bias based on the results of the grid search.
+
+#### Returns
+
+- **best_model**: `estimator` instance  
+  The retrained model instance with the least bias from the grid search results.
+
+---
+
+### `select_balanced_model(threshold)`
+
+Selects and retrains the model with the least bias among the top models with the highest accuracy.
+
+#### Parameters
+
+- **threshold**: `int`  
+  The number of top models to consider based on accuracy.
+
+#### Returns
+
+- **best_model**: `estimator` instance  
+  The retrained model with the least bias among the top models based on accuracy.
+
+---
+
+### `find_optimum_model(margin)`
+
+Searches for and retrains the model with the least bias within a specified margin of the highest accuracy.
+
+#### Parameters
+
+- **margin**: `float`  
+  The tolerance in accuracy discrepancy to consider when selecting the optimum model.
+
+#### Returns
+
+- **best_model**: `estimator` instance  
+  The retrained model that exhibits the least bias within the specified margin of the highest accuracy.
+
+#### Raises
+
+- **ValueError**:  
+  If no models are found within the specified accuracy margin.
+
+---
+
+### `plot_accuracy(threshold)`
+
+Plots a line graph of models' accuracy and bias. The X-axis represents accuracy, and the Y-axis represents bias. A line is drawn on the plot to indicate the accuracy threshold.
+
+#### Parameters
+
+- **threshold**: `int`  
+  The number of top models to consider based on accuracy. This value is used to draw a line on the plot.
+
+#### Returns
+
+- **ax**: `matplotlib.axes.Axes` instance  
+  The plot object showing the relationship between accuracy and bias.
+
+---
+
+### `plot_params(parameter)`
+
+Plots a line graph showing the relationship between a specified parameter and bias. The X-axis represents the parameter value, and the Y-axis represents bias.
+
+#### Parameters
+
+- **parameter**: `str`  
+  The name of a parameter from the initial `param_grid`.
+
+#### Returns
+
+- **plot**: `matplotlib.axes.Axes` instance  
+  The plot object showing the relationship between the specified parameter and bias.

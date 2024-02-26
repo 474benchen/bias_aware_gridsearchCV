@@ -10,7 +10,7 @@ nav_order: 1
 An exploratory venture into including bias considerations into the classical machine learning pipeline.
 {: .fs-6 .fw-300 }
 
-[Get started now](/getting_started/){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+[Get started now][getting started]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [View it on GitHub][bags repo]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 [Check out our Paper][bags paper]{: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
 
@@ -29,3 +29,4 @@ The tool also includes visualization features to help you understand the trade-o
 
 [bags repo]: https://github.com/474benchen/bias_aware_gridsearchCV/tree/main
 [bags paper]: https://www.google.com/
+[getting started]: https://474benchen.github.io/bias_aware_gridsearchCV/getting_started/
