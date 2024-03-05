@@ -56,17 +56,27 @@ for a provided bias metric.
 >>> import seaborn as sns
 >>> from bias_aware_gridsearch import BiasAwareGridSearchCV
 >>> from util import calculate_disparate_impact
+>>> from sklearn.ensemble import RandomForestClassifier
 # load in titanic data
 >>> df = sns.load_dataset('titanic')
+>>> df = df[['pclass', 'age', 'alone','sex', 'survived']]
 # transform categorical to binary
 >>> df['first_class'] = df['pclass'] == 1
+>>> df = df[['first_class', 'age', 'alone', 'survived']].dropna()
 >>> rfc = RandomForestClassifier()
->>> parameter_grid = {'n_estimators': [100, 200], 'max_depth': [5, 10, None]}
+>>> parameter_grid = {'n_estimators': [100, 200], 'max_depth': [5, 10]}
 >>> clf = BiasAwareGridSearchCV(rfc, parameter_grid, df, 'survived', 'first_class', 1, 0, 1)
 >>> clf.fit(df.drop(columns=['survived']), df['survived'], calculate_disparate_impact)
+Processing parameters: {'max_depth': 5, 'n_estimators': 100}
+Processing parameters: {'max_depth': 5, 'n_estimators': 200}
+Processing parameters: {'max_depth': 10, 'n_estimators': 100}
+Processing parameters: {'max_depth': 10, 'n_estimators': 200}
 >>> best_model_acc = clf.select_highest_accuracy_model()
+Selected model parameters: {'max_depth': 5, 'n_estimators': 100} with accuracy: 0.7087363340884467, bias: 0.8825532742303706
 >>> best_model_bias = clf.select_least_biased_model()
->>> best_balanced_model = clf.select_balanced_model(threshold=5)
+Selected model parameters: {'max_depth': 10, 'n_estimators': 200} with accuracy: 0.6541416330148725, bias: 0.7175751435857917
+>>> best_balanced_model = clf.select_balanced_model(threshold=3)
+Selected model parameters: {'max_depth': 10, 'n_estimators': 100} with accuracy: 0.6582980399881808, bias: 0.7226774022458278
 ```
 
 ---
