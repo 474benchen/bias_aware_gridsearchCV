@@ -26,7 +26,7 @@ Our tool stands out by not only measuring model performance in terms of accuracy
 
 ## Overview
 
-<img align="left" src="https://github.com/474benchen/bias_aware_gridsearchCV/blob/main/docs/assets/images/ml_flowchart.png" alt="ML process flowchart" width="60%" height="80%">
+<img align="left" src="../assets/images/ml_flowchart.png" alt="ML process flowchart" width="60%" height="80%">
 
 The package is user-friendly and fits smoothly into standard machine learning workflows. The figure shows a simplified view of the machine learning process. 
 
