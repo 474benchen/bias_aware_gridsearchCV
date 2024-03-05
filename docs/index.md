@@ -25,10 +25,8 @@ BiasAwareGridSearchCV is a Python tool created to address a critical need in mac
 Our tool stands out by not only measuring model performance in terms of accuracy but also considering how fair a model is. With BiasAwareGridSearchCV, you can evaluate and select models based on both their accuracy and their level of exhibited bias as well as visualize features for a clearer understanding of the trade-offs between bias and accuracy.
 
 ## Overview
-
-![alt text](assets/images/ml_flowchart.png)
-
-"[Wroclaw University Library digitizing rare archival texts](https://www.flickr.com/photos/97810305@N08/9401451269)" by [j_cadmus](https://www.flickr.com/photos/97810305@N08) is marked with [CC BY 2.0](https://creativecommons.org/licenses/by/2.0/?ref=openverse).
+<img align="left" src="assets/images/ml_flowchart.png" alt="ML process flowchart" width="60%" height="80%">
+<!-- ![alt text](assets/images/ml_flowchart.png) -->
 
 <!-- <img align="left" src="/docs/assets/images/ml_flowchart.png" alt="ML process flowchart" width="30%" height="60%"> -->
 
@@ -38,15 +36,15 @@ Our algorithm is created to be used during the “Hyperparameter Tuning” stage
 
 In short, BiasAwareGridSearchCV is our effort to ensure that AI and machine learning contribute positively and fairly to our society, providing tools that help mitigate bias in automated decision-making.
 
+<br>
+<br>
+<br>
+<br>
 
-<br>
-<br>
-<br>
+
 
 {: .note } 
 This work runs adjacent to existing bias mitigation techniques - it is presented as a novel step to the pre-processing, in-processing, and post-processing steps that already exist.
-
-<br>
 
 ## Data
 
