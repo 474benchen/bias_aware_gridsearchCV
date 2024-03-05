@@ -26,7 +26,7 @@ Our tool stands out by not only measuring model performance in terms of accuracy
 
 ## Overview
 
-<img align="left" src="../assets/images/ml_flowchart.png" alt="ML process flowchart" width="60%" height="80%">
+<img align="left" src="/docs/assets/images/ml_flowchart.png" alt="ML process flowchart" width="30%" height="60%">
 
 The package is user-friendly and fits smoothly into standard machine learning workflows. The figure shows a simplified view of the machine learning process. 
 
@@ -41,6 +41,8 @@ In short, BiasAwareGridSearchCV is our effort to ensure that AI and machine lear
 
 {: .note } 
 This work runs adjacent to existing bias mitigation techniques - it is presented as a novel step to the pre-processing, in-processing, and post-processing steps that already exist.
+
+<br>
 
 ## Data
 
