@@ -47,12 +47,35 @@ for a provided bias metric.
 | `bias (float)`    | Average exhibited bias across folds.                                |
 | `raw_bias (list)`        | Exhibited bias for each fold.                          |
 
+---
+
+## Examples
+
+```
+>>> import pandas as pd
+>>> import seaborn as sns
+>>> from bias_aware_gridsearch import BiasAwareGridSearchCV
+>>> from util import calculate_disparate_impact
+# load in titanic data
+>>> df = sns.load_dataset('titanic')
+# transform categorical to binary
+>>> df['first_class'] = df['pclass'] == 1
+>>> rfc = RandomForestClassifier()
+>>> parameter_grid = {'n_estimators': [100, 200], 'max_depth': [5, 10, None]}
+>>> clf = BiasAwareGridSearchCV(rfc, parameter_grid, df, 'survived', 'first_class', 1, 0, 1)
+>>> clf.fit(df.drop(columns=['survived']), df['survived'], calculate_disparate_impact)
+>>> best_model_acc = clf.select_highest_accuracy_model()
+>>> best_model_bias = clf.select_least_biased_model()
+>>> best_balanced_model = clf.select_balanced_model(threshold=5)
+```
+
+---
 
 ## Methods
 
 | Method                         | Description                                                                                         |
 |--------------------------------|-----------------------------------------------------------------------------------------------------|
-| `fit(X,y,bias_function)`                          | Runs grid search with cross-validation, evaluating models for accuracy and bias.                                                                                                                                   |
+| `fit(X, y, bias_function)`                          | Runs grid search with cross-validation, evaluating models for accuracy and bias.                                                                                                                                   |
 | `select_highest_accuracy_model()`| Selects the model with the highest accuracy from the grid search results.                          |
 | `select_least_biased_model()`    | Selects the model with the least bias from the grid search results.                                |
 | `select_balanced_model()`        | Selects the model with the least bias among top models based on accuracy.                          |
