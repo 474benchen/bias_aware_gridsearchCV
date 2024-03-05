@@ -17,4 +17,6 @@ In short, BiasAwareGridSearchCV is our effort to ensure that AI and machine lear
 {: .note } 
 This work runs adjacent to existing bias mitigation techniques - it is presented as a novel step to the pre-processing, in-processing, and post-processing steps that already exist.
 
-// add flow chart here
+<img align="left" src="/docs/assets/images/ml_flowchart.png" alt="ML process flowchart" width="40%" height="70%">
+This is a simplified view of the machine learning process. Our algorithm is created to be used during the “Hyperparameter Tuning” stage. Here is where the selected model is trained using various parameters and evaluated. Our tool inserts bias mitigation into this step by making it a factor in model evaluation.
+
