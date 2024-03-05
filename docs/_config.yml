@@ -2,5 +2,5 @@ title: BAGS
 description: Documentation for a bias aware gridsearchCV repo.
 theme: just-the-docs
 
-url: 'https://474benchen.github.io/'
-baseurl: 'bias_aware_gridsearchCV/'
+url: 'https://474benchen.github.io'
+baseurl: '/bias_aware_gridsearchCV'
