@@ -20,12 +20,27 @@ An exploratory venture into including bias considerations into the classical mac
 Specific use cases and detailed examples can be found in the repo.
 
 
-Welcome to the documentation for BiasAwareGridSearchCV. This tool is a practical extension for machine learning models, focusing on fairness during the hyperparameter tuning process.
+BiasAwareGridSearchCV is a Python tool created to address a critical need in machine learning: reducing bias. Developed as an extension of scikit-learn, this package helps data professionals build fairer machine learning models by integrating bias into the classical machine learning workflow. It’s designed for situations where decisions could be influenced by factors like gender or race, and where it’s crucial to ensure these decisions are as unbiased as possible.
 
-BiasAwareGridSearchCV evaluates models based on both their accuracy and how fairly they treat a specified protected attribute, like age or gender. It offers different selection methods to find the most accurate, least biased, or a balanced model based on your needs. This approach is particularly useful in scenarios where decision fairness is as important as decision accuracy.
+Our tool stands out by not only measuring model performance in terms of accuracy but also considering how fair a model is. With BiasAwareGridSearchCV, you can evaluate and select models based on both their accuracy and their level of exhibited bias as well as visualize features for a clearer understanding of the trade-offs between bias and accuracy.
+
+## Overview
+
+<img align="left" src="../assets/images/ml_flowchart.png" alt="ML process flowchart" width="60%" height="80%">
+
+The package is user-friendly and fits smoothly into standard machine learning workflows. The figure shows a simplified view of the machine learning process. 
+
+Our algorithm is created to be used during the “Hyperparameter Tuning” stage, where the selected model is trained using various parameters and evaluated. Our tool inserts bias consideration into this step by making it a factor in model evaluation alongside traditional performance metrics.
+
+In short, BiasAwareGridSearchCV is our effort to ensure that AI and machine learning contribute positively and fairly to our society, providing tools that help mitigate bias in automated decision-making.
 
 
-The tool also includes visualization features to help you understand the trade-offs between accuracy and bias in your models. With these, you can see how changes in parameters affect your model's fairness. Our documentation aims to make it easy to use BiasAwareGridSearchCV in your own machine learning workflows, helping you create models that are both effective and fair.
+<br>
+<br>
+<br>
+
+{: .note } 
+This work runs adjacent to existing bias mitigation techniques - it is presented as a novel step to the pre-processing, in-processing, and post-processing steps that already exist.
 
 ## Data
 
