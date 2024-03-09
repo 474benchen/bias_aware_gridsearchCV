@@ -61,7 +61,7 @@ Each dataset was individually cleaned, processed, and explored based on the focu
 ### Development
 For the purposes of our project, we decided to focus on RandomForest models, using either [statistical parity](https://474benchen.github.io/bias_aware_gridsearchCV/documentation/bias_functions/statistical_parity) or [disparate impact](https://474benchen.github.io/bias_aware_gridsearchCV/documentation/bias_functions/disparate_impact) as the bias metric. The basis of our tool is heavily modeled after sklearn’s GridSearchCV. We modified it by adding in a bias evaluation layer, where one would be able to select models using varied criteria. Our method allows the selection of the least biased model, most accurate model, or most balanced model. 
 
-// Insert graphic depicting which was the protected attribute and target variable for each dataset, and the selected bias metric
+<img src="assets/images/dataset_details.png" alt="Dataset feature details" width="60%" height="80%">
 
 
 [bags repo]: https://github.com/474benchen/bias_aware_gridsearchCV/tree/main
