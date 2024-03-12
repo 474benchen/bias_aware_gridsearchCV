@@ -58,7 +58,7 @@ Our project’s purpose is to incorporate bias consideration into the evaluation
 ### Preprocessing
 Each dataset was individually cleaned, processed, and explored based on the focus of that dataset’s domain. BAGS is currently only applicable to classification tasks, so we ensured that each dataset could meet that constraint. Each dataset had to contain both a target variable and a protected attribute. The target variable is the variable being predicted, and a protected attribute is the feature sensitive to bias. Below are the specific target variables and protected attributes selected for each domain.
 
-<img src="assets/images/dataset_details.png" alt="Dataset feature details" width="60%" height="80%">
+<center><img src="assets/images/dataset_details.png" alt="Dataset feature details" width="60%" height="80%"></center>
 
 ### Development
 For the purposes of our project, we decided to focus on RandomForest models, using either [statistical parity](https://474benchen.github.io/bias_aware_gridsearchCV/documentation/bias_functions/statistical_parity) or [disparate impact](https://474benchen.github.io/bias_aware_gridsearchCV/documentation/bias_functions/disparate_impact) as the bias metric. The basis of our tool is heavily modeled after sklearn’s GridSearchCV. We modified it by adding in a bias evaluation layer, where one would be able to select models using varied criteria. Our method allows the selection of the least biased model, most accurate model, or most balanced model. 
