@@ -1,8 +1,8 @@
 ---
 layout: default
-title: disparate impact
-parent: bias statistic functions
-grand_parent: documentation
+title: Disparate Impact
+parent: Bias Statistic Functions
+grand_parent: Documentation
 permalink: /documentation/bias_functions/disparate_impact
 ---
 
