@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Bias Aware Gridsearch CV
-parent: documentation
+parent: Documentation
 permalink: /documentation/bias_aware_gridsearch_cv
 ---
 

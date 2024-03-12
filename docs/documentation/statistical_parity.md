@@ -1,8 +1,8 @@
 ---
 layout: default
-title: statistical parity
-parent: bias statistic functions
-grand_parent: documentation
+title: Statistical Parity
+parent: Bias Statistic Functions
+grand_parent: Documentation
 permalink: /documentation/bias_functions/statistical_parity
 ---
 

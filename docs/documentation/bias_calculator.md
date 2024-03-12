@@ -1,7 +1,7 @@
 ---
 layout: default
-title: bias statistic functions
-parent: documentation
+title: Bias Statistic Functions
+parent: Documentation
 has_children: True
 permalink: /documentation/bias_functions
 ---
