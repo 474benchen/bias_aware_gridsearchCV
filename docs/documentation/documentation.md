@@ -1,6 +1,6 @@
 ---
 layout: page
-title: documentation
+title: Documentation
 has_children: true
 permalink: /documentation/
 nav_order: 4
