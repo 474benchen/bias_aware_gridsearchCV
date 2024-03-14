@@ -29,19 +29,8 @@ in order to explore our work:
     ```
     cd biased_gridsearch
     ```
-### Option 1: Using requirements.txt
 
-Ensure that you have pip installed before attempting this option. Instructions can be found [here](https://pip.pypa.io/en/stable/installation/).
-
-1. Install the required packages using pip:
-
-    ```
-    pip install -r requirements.txt
-    ```
-
-2. Proceed to the next steps for data setup.
-
-### Option 2: Reconstructing the Conda Environment
+### Option 1: Reconstructing the Conda Environment (recommended)
 
 Ensure that you have conda installed before attempting this option. Distributions can be found [here](https://www.anaconda.com/download).
 
@@ -57,23 +46,24 @@ Ensure that you have conda installed before attempting this option. Distribution
     conda activate biased_gs
     ```
 
-3. Proceed to the next steps for data setup.
+### Option 2: Using requirements.txt
+
+Ensure that you have pip installed before attempting this option. Instructions can be found [here](https://pip.pypa.io/en/stable/installation/).
+
+1. Install the required packages using pip:
+
+    ```
+    pip install -r requirements.txt
+    ```
+
 
 ## Data Setup
 
-For each example, data has been provided in the same directory.
+For each example, data has either been provided in the same directory or is implicitly loaded within the sample.
 
 
-## Examples
-This section provides examples of how to apply the Enhanced GridSearchCV in each of the four domains. Please refer to the respective folders for detailed notebooks:
-
-- `/healthcare_example`
-- `/recidivism_example`
-- `/mortgage_example`
-- `/finance_example`
-
-## Authors
-- [Anika Garg](https://www.linkedin.com/in/anika-garg/)
+## Contributors
 - [Benjamin Chen](https://www.linkedin.com/in/474benjaminchen/)
 - [Jayson Leach](https://www.linkedin.com/in/jayson-leach/)
 - [Stephanie Chavez](https://www.linkedin.com/in/stephanie-chavez-000840223/)
+- [Anika Garg](https://www.linkedin.com/in/anika-garg/)
