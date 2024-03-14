@@ -56,25 +56,40 @@ Our project’s purpose is to incorporate bias consideration into the evaluation
 
 ## Methodology
 ### Preprocessing
-Each dataset was individually cleaned, processed, and explored based on the focus of that dataset’s domain. BAGS is currently only applicable to classification tasks, so we ensured that each dataset could meet that constraint. Each dataset had to contain both a target variable and a protected attribute. The target variable is the variable being predicted, and a protected attribute is the feature sensitive to bias. Below are the specific target variables and protected attributes selected for each domain.
+Each dataset was individually cleaned, processed, and explored based on the focus of that dataset’s domain. BAGS is currently only applicable to classification tasks, so we ensured that each dataset could meet that constraint. Each dataset had to contain both a target variable and a protected attribute. The target variable is the variable being predicted, and a protected attribute is the feature sensitive to bias. Below are the specific features selected for each domain.
 
 <center><img src="assets/images/dataset_details.png" alt="Dataset feature details" width="60%" height="80%"></center>
 
+
 ### Development
-For the purposes of our project, we decided to focus on RandomForest models, using either [statistical parity](https://474benchen.github.io/bias_aware_gridsearchCV/documentation/bias_functions/statistical_parity) or [disparate impact](https://474benchen.github.io/bias_aware_gridsearchCV/documentation/bias_functions/disparate_impact) as the bias metric. The basis of our tool is heavily modeled after sklearn’s GridSearchCV. We modified it by adding in a bias evaluation layer, where one would be able to select models using varied criteria. Our method allows the selection of the least biased model, most accurate model, or most balanced model. 
+ 
 
 ## Results
-Our package is not a bias mitigation tool, instead it is for the purposes of bias awareness and optimization. Thus, results from all four domains showed minimal improvements in bias when compared to naive gridsearch methods. 
+Our package is not a bias mitigation tool, instead it is for the purposes of bias awareness and optimization. Thus, most results from all four domains showed only slight improvements in bias when compared to naive gridsearch methods. The table below depicts various selection criteria and their respective test set bias metrics, after retraining each selected model.
 
-*figure showing naive vs balanced bias stat; tbd bc I dont have all the values available right now*
+<center><img src="assets/images/biasmetrics_chart.png" alt="A table depicting the test set bias metrics by gridsearch result" width="60%" height="80%"></center>
 
-Despite the overall lack of bias reduction, we were able to use our package to make insights into what factors may contribute to inflated bias. BAGS includes plot functions plot_accuracy and plot_params which help to visualize the relationships accuracy and each parameter had during the gridsearch.
+For the most part, bias stayed relatively the same across the board. Slight improvements were made using the BAGS least biased model, as seen in both the Mortgage and Recidivism examples.
 
-*plots; debating whether to delve into one domain or briefly describe each one. Don’t want the homepage to be too cluttered with plots*
+As displayed below, accuracy values across the domains followed a similar pattern; accuracy for BAGS models tended to be similar to that of the naive gridsearch except for the least biased model selection, where accuracy decreased. The exception to this was seen in the Income example, in which the least biased test accuracy was the highest (by a small margin) compared to all other selection criteria. 
 
-We discovered that more accurate models also tend to be fairer. *(explaining how this makes sense given that more accurate models are truer to the data they are attempting to make predictions on)*
+<center><img src="assets/images/accuracy_chart.png" alt="A table depicting the test set accuracy scores by gridsearch result" width="60%" height="80%"></center>
 
-We also found that select parameters carry more weight on bias present in the model than others. Based on our observations, parameters such as n_estimators and max_leaf_nodes tend to make a significant impact on bias throughout the search.
+Despite the overall lack of bias reduction, we were able to use our package to make insights into what factors may contribute to inflated bias. BAGS includes plot functions plot_accuracy and plot_params which help to visualize the relationships accuracy and each parameter had during the gridsearch. Below are the results from plot_params for the Mortgage example, plots for the other domains can be found in our [report](https://www.google.com/).
+
+<center><img src="assets/images/params_plots_mortgage.png" alt="A table showing plot_params results for Mortgage example" width="90%" height="80%"></center>
+
+As seen above, max_leaf_nodes has the strongest relationship to bias of the parameters we tested. This discovery was consistent across all four domains: as max_leaf_nodes increased, bias improved. 
+
+<center><img src="assets/images/accuracy_bias_plots.png" alt="A table showings Bias vs Accuracy plots for all 4 domains" width="80%" height="80%"></center>
+
+We discovered that more accurate models also tend to be fairer. All four domains showed that, to some degree, models with higher accuracies exhibited less bias. This finding aligns with the intuitive behavior of bias; a model which better represents a given dataset will be able to output more accurate and fairer predictions by making fewer assumptions. 
+
+### Discussion and Conclusion
+In the field of machine learning, the delicate issue of fairness is ever present in almost every step of the process. As AI decision making models become more integrated into everyday life, research on the role of bias in these models have led to several advancements addressing problems of potential unfairness. IBM’s AI 360 Fairness toolkit, for example, is used to detect and mitigate biases when creating models. This toolkit provides insights to bias metrics such as disparate impact, statistical parity, Theil index, equal opportunity difference, and more. Packages such as this one provide awareness of the importance of fairness in model consideration, but even they have their limitations. 
+
+Bias mitigation techniques such as reweighing, prejudice remover, and disparate impact remover are useful in certain situations, but carry with them an array of setbacks. Depending on the specific dataset and use, bias is sometimes necessary in order to have a comprehensive understanding of what features constitute each class. In cases where bias is rightfully present in real life, applying bias mitigation techniques could cause a model to provide unrealistic and inaccurate results. An example of this in practice can be seen [here](https://474benchen.github.io/bias_aware_gridsearchCV/caution/).
+
 
 [bags repo]: https://github.com/474benchen/bias_aware_gridsearchCV/tree/main
 [bags paper]: https://www.google.com/
