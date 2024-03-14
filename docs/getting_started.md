@@ -7,6 +7,7 @@ permalink: getting_started/
 
 # Getting Started
 
+
 To replicate our environment, you can choose from the following options. Regardless of which option,
 in order to explore our work:
 
@@ -21,18 +22,8 @@ in order to explore our work:
     ```
     cd biased_gridsearch
     ```
-### Option 1: Using requirements.txt
 
-Ensure that you have pip installed before attempting this option. Instructions can be found [here](https://pip.pypa.io/en/stable/installation/).
-
-1. Install the required packages using pip:
-
-    ```
-    pip install -r requirements.txt
-    ```
-
-
-### Option 2: Reconstructing the Conda Environment
+## Option 1: Reconstructing the Conda Environment (recommended)
 
 Ensure that you have conda installed before attempting this option. Distributions can be found [here](https://www.anaconda.com/download).
 
@@ -46,4 +37,14 @@ Ensure that you have conda installed before attempting this option. Distribution
 
     ```
     conda activate biased_gs
+    ```
+
+## Option 2: Using requirements.txt
+
+Ensure that you have pip installed before attempting this option. Instructions can be found [here](https://pip.pypa.io/en/stable/installation/).
+
+1. Install the required packages using pip:
+
+    ```
+    pip install -r requirements.txt
     ```
