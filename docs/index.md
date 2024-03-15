@@ -111,5 +111,5 @@ Though BAGS alone did not result in any significant reduction in bias among the 
 
 
 [bags repo]: https://github.com/474benchen/bias_aware_gridsearchCV/tree/main
-[bags paper]: https://drive.google.com/file/d/1n-1Ri1YD5GndceBPWfNFi52_W1ECl_KN/view?usp=sharing
+[bags paper]: https://github.com/474benchen/bias_aware_gridsearchCV/blob/main/docs/report.pdf
 [getting started]: https://474benchen.github.io/bias_aware_gridsearchCV/getting_started/
